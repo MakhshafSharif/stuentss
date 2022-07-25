@@ -1,0 +1,78 @@
+using System;
+using System.Collections.Generic;
+using System.Web.Services;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace WebApplication2
+{
+    public partial class WebForm1 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            var bindList = studentList();
+            Drop.DataSource = bindList;
+            Drop.DataTextField = "name";
+            Drop.DataValueField = "id";
+            Drop.DataBind();
+
+
+
+        }
+
+        public class Student
+        {
+            public string Name { get; set; }
+            public int Id { get; set; }
+            public string Email { get; set; }
+
+        }
+        public static List<Student> studentList()
+        {
+            var myList = new List<Student>();
+            myList.Add(new Student() { Name = "Makhshaf", Id = 1, Email = "Makhshaf@gmail.com" });
+            myList.Add(new Student() { Name = "Hala", Id = 2, Email = "Hala@gmail.com" });
+            myList.Add(new Student() { Name = "Ali", Id = 3, Email = "Ali@gmail.com" });
+            myList.Add(new Student() { Name = "Zainab", Id = 4, Email = "Zainab@gmail.com" });
+            myList.Add(new Student() { Name = "Hira", Id = 5, Email = "Hira@gmail.com" });
+            myList.Add(new Student() { Name = "Areeha", Id = 6, Email = "Areeha@gmail.com" });
+            myList.Add(new Student() { Name = "Huma", Id = 7, Email = "Huma@gmail.com" });
+            myList.Add(new Student() { Name = "Aima", Id = 8, Email = "Aima@gmail.com" });
+            myList.Add(new Student() { Name = "Sameen", Id = 9, Email = "Sameen@gmail.com" });
+            myList.Add(new Student() { Name = "Javeria", Id = 10, Email = "Javeria@gmail.com" });
+            myList.Add(new Student() { Name = "Ahsan", Id = 11, Email = "Ahsan@gmail.com" });
+            myList.Add(new Student() { Name = "Sohaib", Id = 12, Email = "Sohaib@gmail.com" });
+            myList.Add(new Student() { Name = "Tazeem", Id = 13, Email = "Tazeem@gmail.com" });
+            myList.Add(new Student() { Name = "Seerat", Id = 14, Email = "Seerat@gmail.com" });
+            myList.Add(new Student() { Name = "Esha", Id = 15, Email = "Esha@gmail.com" });
+            myList.Add(new Student() { Name = "Abdullah", Id = 16, Email = "Abdullah@gmail.com" });
+            myList.Add(new Student() { Name = "Burhan", Id = 17, Email = "Burhan@gmail.com" });
+            myList.Add(new Student() { Name = "Gohar", Id = 18, Email = "Gohar@gmail.com" });
+            myList.Add(new Student() { Name = "Tehreem", Id = 19, Email = "Tehreem@gmail.com" });
+            myList.Add(new Student() { Name = "Umair", Id = 20, Email = "Umair@gmail.com" });
+
+            return myList;
+        }
+        [WebMethod]
+        public static List<string> DisplayData(string Student)
+        {
+            var dispStudent = new List<string>();
+            foreach (var attribute in studentList())
+            {
+                if (attribute.Id == Convert.ToInt32(Student))
+                {
+                    dispStudent.Add(attribute.Name);
+                    dispStudent.Add(attribute.Email);
+                    dispStudent.Add(attribute.Id.ToString());
+
+                    return dispStudent;
+                }
+
+            }
+
+            return null;
+        }
+    }
+}
